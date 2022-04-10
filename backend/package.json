@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/Yves91700/P6_Piquante/issues"
   },
-  "homepage": "https://github.com/Yves91700/P6_Piquante#readme"
+  "homepage": "https://github.com/Yves91700/P6_Piquante#readme",
+  "dependencies": {
+    "express": "^4.17.3",
+    "mongoose": "^6.2.10"
+  }
 }
