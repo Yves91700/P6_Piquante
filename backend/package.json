@@ -1,0 +1,20 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "P6 Construisez une API sécurisée",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yves91700/P6_Piquante.git"
+  },
+  "author": "Yves Pierre",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Yves91700/P6_Piquante/issues"
+  },
+  "homepage": "https://github.com/Yves91700/P6_Piquante#readme"
+}
