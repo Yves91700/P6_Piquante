@@ -18,7 +18,9 @@
   },
   "homepage": "https://github.com/Yves91700/P6_Piquante#readme",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "express": "^4.17.3",
-    "mongoose": "^6.2.10"
+    "mongoose": "^6.2.10",
+    "mongoose-unique-validator": "^3.0.0"
   }
 }

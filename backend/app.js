@@ -6,13 +6,16 @@ const app = express();
 // importation de mongoose
 const mongoose = require('mongoose');
 
+const userRoutes = require('./routes/userRoute');
+
+
 mongoose.connect('mongodb+srv://Yves91700:Open91700@cluster0.8gwkp.mongodb.net/Cluster0?retryWrites=true&w=majority',
   { useNewUrlParser: true,
     useUnifiedTopology: true })
   .then(() => console.log('Connexion à MongoDB réussie !'))
   .catch(() => console.log('Connexion à MongoDB échouée !'));
 
-
+const Sauce = require('./models/sauce');
 
 
 //***************** middleware ***************** */
@@ -37,27 +40,37 @@ app.use((req, res, next) => {
 
 //******************************************************************************************************************************* */
 
-// route post
+// route post pour envoyer une nouvelle sauce 
 app.post('/api/sauces', (req, res, next) => {
-    console.log(req.body);
-    res.status(201).json({
-      message: 'Objet créé !'
+    delete req.body._id;
+    const sauce = new Sauce({
+        ...req.body
     });
-  });
+    sauce.save()
+    .then(() => res.status(200).json({message:'Objet enregistré!'}))
+    .catch(error => res.status(400).json({ error }));
+    });
+  
+// route get implementer afin de recuperer une sauce specifique
+app.get('/api/sauces/:id', (req, res, next) => {
+    Sauce.findOne({ _id: req.params.id})
+    .then(sauce => res.status(200).json(sauce))
+    .catch( error => res.status(404).json({ error}));
+});
 
 
-//route de l'api
+//route get implementer afin qu'elle renvoie tous les sauces dans la base de données
 app.get('/api/sauces', (req, res, next) => {
-    console.log(req.body);
-    
-    res.status(200).json({message:'merci'});
+   Sauce.find()
+   .then(sauces => res.status(200).json(sauces))
+   .catch( error => res.status(400).json({ error })); 
   });
 
   
 
 
 
-
+app.use('/api/auth', userRoutes);
 
 
 
