@@ -6,10 +6,15 @@ const sauceRoutes = require("./routes/sauceRoute");
 const userRoutes = require("./routes/userRoute");
 const path = require("path");
 
+// Importation du module dotenv pour utiliser les variables d'environnement écrites dans le  fichier .env dans le répertoire racine du dossier backend
+require('dotenv').config();
+
+
 mongoose
   .connect(
-    "mongodb+srv://Yves91700:Open91700@cluster0.8gwkp.mongodb.net/Cluster0?retryWrites=true&w=majority",
+    process.env.SECRET_DB,
     { useNewUrlParser: true, useUnifiedTopology: true }
+    
   )
   .then(() => console.log("Connexion à MongoDB réussie !"))
   .catch(() => console.log("Connexion à MongoDB échouée !"));

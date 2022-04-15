@@ -53,8 +53,13 @@ exports.getAllSauces = (req, res, next) => {
         Sauce.deleteOne({_id : req.params.id})
     .then(res.status(200).json({ message: "Sauce supprimée" }))
     .catch(error => res.status(400).json({ error }))
-    
       })
     })
     .catch(error => res.status(500).json({ error }))
+    
+    /*if (thing.userId !== req.auth.userId) {
+      res.status(400).json({
+        error: new Error('Unauthorized request!')
+      });
+    }*/
   };
