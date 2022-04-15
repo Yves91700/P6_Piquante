@@ -7,7 +7,7 @@ const cryptojs = require("crypto-js"); //Déclaration et importation du package 
 require('dotenv').config();
 
 
-// fonctions pour 
+// signup pour enregistrer un nouvel utilisateur
 exports.signup = (req, res, next) => {
 //chiffrer l'email dans la base de donnée
 const emailCryptoJs = cryptojs

@@ -2,14 +2,19 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+
+//*************************************** déclaration et importation des routes**************************** */
 const sauceRoutes = require("./routes/sauceRoute");
 const userRoutes = require("./routes/userRoute");
+//*************************************** Modules complémentaire*************************************************** */
+// importation du module express-mongo-sanitize qui nettoie les données fournies par l'utilisateur pour empêcher des injections sql vers mongoDB
+const mongoSanitize = require("express-mongo-sanitize");
 const path = require("path");
 
 // Importation du module dotenv pour utiliser les variables d'environnement écrites dans le  fichier .env dans le répertoire racine du dossier backend
 require('dotenv').config();
 
-
+//****************************************************** DATA BASE ************************************************ */
 mongoose
   .connect(
     process.env.SECRET_DB,
@@ -18,6 +23,7 @@ mongoose
   )
   .then(() => console.log("Connexion à MongoDB réussie !"))
   .catch(() => console.log("Connexion à MongoDB échouée !"));
+
 
 //on appelle express avec cette const et qui permet de créer l'application express
 const app = express();
@@ -44,6 +50,14 @@ app.use((req, res, next) => {
 app.use(express.json());
 
 app.use(bodyParser.json());
+
+//protection injection sql qui remplace les caractères interdits "$" et "." par _
+app.use(
+  mongoSanitize({
+    replaceWith: "_",
+  })
+);
+
 
 app.use("/images", express.static(path.join(__dirname, "images")));
 app.use("/api/sauces", sauceRoutes);
