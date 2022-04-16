@@ -7,6 +7,12 @@ const mongoose = require("mongoose");
 const sauceRoutes = require("./routes/sauceRoute");
 const userRoutes = require("./routes/userRoute");
 //*************************************** Modules complémentaire*************************************************** */
+
+// importation de morgan "http request logger"
+const morgan = require("morgan");
+
+
+
 // importation du module express-mongo-sanitize qui nettoie les données fournies par l'utilisateur pour empêcher des injections sql vers mongoDB
 const mongoSanitize = require("express-mongo-sanitize");
 const path = require("path");
@@ -29,6 +35,10 @@ mongoose
 const app = express();
 
 //************** Cross Origin Ressource Sharing (CORS)*************************************************************************** */
+
+// log des request et des response
+app.use(morgan("dev"));
+
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");

@@ -1,5 +1,5 @@
 const Sauce = require('../models/sauce');
-const fs = require('fs');
+const fse = require('fs-extra'); //Package pour accéder et interagir avec le système de fichiers
 //**************** logique metier************** */
 
 exports.createSauce = (req, res, next) => {
