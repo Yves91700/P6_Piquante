@@ -1,6 +1,11 @@
+// Importation du package HTTP intégré qui permet à Node.js de transférer des données via le protocole HTTP (Hyper Text Transfer Protocol)
 const http = require("http");
-const app = require("./app");
 
+// Appel du fichier app.js
+const app = require("./app");
+// Importation du module dotenv pour utiliser les variables d'environnement écrites dans le  fichier .env dans le répertoire racine du dossier backend
+require("dotenv").config();
+/*************************** Le Serveur ************************** */
 // la fonction normalizePort renvoit un port valide
 const normalizePort = (val) => {
   const port = parseInt(val, 10);

@@ -1,7 +1,7 @@
 /**************** Déclarations et Importations***************** */
 
 const Sauce = require("../models/sauce");
-const fs = require("fs"); //Package pour accéder et interagir avec le système de fichiers
+const fs = require("fs-extra"); //Package pour accéder et interagir avec le système de fichiers
 
 /********************** logique metier ************************************* */
 
