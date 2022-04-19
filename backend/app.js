@@ -36,7 +36,6 @@ const app = express();
 
 // log des requests et des responses
 app.use(morgan("dev"));
-
 app.use((req, res, next) => {
   // Header qui permet à d'accéder à notre API depuis n'importe quelle origine ('*')
   res.setHeader("Access-Control-Allow-Origin", "*");
