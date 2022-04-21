@@ -29,6 +29,25 @@ exports.createSauce = (req, res, next) => {
 
 /*********** Modification d'une sauce *********** */
 exports.updateSauce = (req, res, next) => {
+/* si on modifie le fichier image, récupérer le nom du fichier image sauce actuelle et suppression
+  pour éviter d'avoir un fichier inutile dans le dossier images */
+  if (req.file) {
+    Sauce.findOne({ _id: req.params.id })
+      .then((sauce) => {
+        const filename = sauce.imageUrl.split("/images")[1];
+        //suppression de l'image de la sauce car elle va être remplacer par la nouvelle image de sauce
+        // On utilise la méthode unlink du package fs qui supprime un fichier ou un lien symbolique
+        fs.unlink(`images/${filename}`, (err) => {
+          if (err) throw err;
+        });
+      })
+      .catch((error) => res.status(400).json({ error }));
+  } else {
+  }
+  
+  //l'objet qui va être envoyé dans la base de donnée
+  // Vérification si le user modifie l'image en regardant si le req.file existe et on traite la nouvelle image
+  // s'il n'existe pas, on traite simplement l'objet entrant
   const sauceObject = req.file
     ? {
         ...JSON.parse(req.body.sauce),
